@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-json-config
+  labels:
+    app: hello-json-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-json-config
+  template:
+    metadata:
+      labels:
+        app: hello-json-config
+    spec:
+      containers:
+        - name: hello
+          imagePullPolicy: IfNotPresent
+          image: nzuguem/hello-kubernetes-config:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: SPRING_APPLICATION_JSON
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-json-config
+                  key: application.json

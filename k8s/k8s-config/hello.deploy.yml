@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes-config
+  labels:
+    app: hello-kubernetes-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-kubernetes-config
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes-config
+    spec:
+      serviceAccountName: hello-kubernetes-config
+      containers:
+        - name: hello
+          imagePullPolicy: IfNotPresent
+          image: nzuguem/hello-kubernetes-config:latest
+          ports:
+            - name: http
+              containerPort: 8080

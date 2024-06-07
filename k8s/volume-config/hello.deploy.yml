@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-volume-config
+  labels:
+    app: hello-volume-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-volume-config
+  template:
+    metadata:
+      labels:
+        app: hello-volume-config
+    spec:
+      volumes:
+        - name: application-config
+          configMap:
+            name: hello-volume-config
+      containers:
+        - name: hello
+          imagePullPolicy: IfNotPresent
+          image: nzuguem/hello-kubernetes-config:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: SPRING_CONFIG_LOCATION
+              value: /config/application.properties
+          volumeMounts:
+            - name: application-config
+              mountPath: /config
