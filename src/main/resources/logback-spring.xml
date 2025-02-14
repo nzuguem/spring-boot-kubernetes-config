@@ -5,7 +5,7 @@
     <import class="ch.qos.logback.classic.filter.ThresholdFilter"/>
     <import class="ch.qos.logback.contrib.json.classic.JsonLayout"/>
     <import class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"/>
-    
+
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
@@ -15,7 +15,7 @@
         </filter>
         <encoder class="JsonEncoder"/>
     </appender>
-    
+
     <!--
     Requires lib Logback Contrib
     Beware, for these lib are full of vulnerabilities.
@@ -28,14 +28,14 @@
             <layout class="JsonLayout">
                 <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSX</timestampFormat>
                 <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>
-                
+
                 <jsonFormatter class="JacksonJsonFormatter">
                     <prettyPrint>true</prettyPrint>
                 </jsonFormatter>
             </layout>
         </encoder>
     </appender>
-    
+
     <springProfile name="container,kubernetes">
         <root level="INFO">
             <appender-ref ref="CONSOLE_JSON_ENCODER"/>

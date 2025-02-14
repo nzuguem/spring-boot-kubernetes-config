@@ -4,11 +4,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "application.hello")
+@ConfigurationProperties(prefix = "application.hello.configs")
 public class HelloKubernetesConfig {
-    
+
     private String target = "Nzuguem";
-		
+
     public String getTarget() {
         return this.target;
     }

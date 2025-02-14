@@ -7,7 +7,9 @@ data:
     {
         "application": {
             "hello": {
-                "target": "Ulrich"
+                "configs": {
+                    "target": "Ulrich"
+                }
             }
         }
     }

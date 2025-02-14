@@ -14,19 +14,26 @@ public class HelloKubernetesConfigApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HelloKubernetesConfigApplication.class, args);
 	}
-	
+
 	@RestController
 	class HelloHelloKubernetesConfigController {
-		
-		private final HelloKubernetesConfig helloKubernetesConfig;
 
-        HelloHelloKubernetesConfigController(HelloKubernetesConfig helloKubernetesConfig) {
+		private final HelloKubernetesConfig helloKubernetesConfig;
+		private final HelloKubernetesSecret helloKubernetesSecret;
+
+        HelloHelloKubernetesConfigController(HelloKubernetesConfig helloKubernetesConfig, HelloKubernetesSecret helloKubernetesSecret) {
             this.helloKubernetesConfig = helloKubernetesConfig;
+            this.helloKubernetesSecret = helloKubernetesSecret;
         }
 
         @GetMapping
 		String hello() {
 			return "Hello %s".formatted(this.helloKubernetesConfig.getTarget());
+		}
+
+		@GetMapping("/secret")
+		String helloSecret() {
+			return "Hello %s".formatted(this.helloKubernetesSecret.getPassword());
 		}
     }
 

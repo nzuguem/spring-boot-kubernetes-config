@@ -4,4 +4,4 @@ metadata:
   name: hello-volume-config
 data:
   application.properties: |-
-    application.hello.target: Ulrich
+    application.hello.configs.target: Ulrich
